@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  database:
+    container_name: database
+    image: mongo:7
+    restart: always
+    env_file:
+      - ./db/.env
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./db:/data/db
+  backend:
+    container_name: backend
+    restart: always
+    build: ./backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - database
