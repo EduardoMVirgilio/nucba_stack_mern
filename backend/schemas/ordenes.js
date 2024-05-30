@@ -6,9 +6,9 @@ export default new Schema({
   method: { type: String, require: true, default: "cash" },
   items: [
     {
-      id: { type: Schema.Types.ObjectId },
-      price: { type: Number },
-      quantity: { type: Number },
+      id: { type: Schema.Types.ObjectId, ref: "producto" },
+      price: { type: Number, default: 1, min: 1 },
+      quantity: { type: Number, default: 1, min: 1 },
     },
   ],
 });
