@@ -11,7 +11,9 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(db);
+
+db.on("error", () => console.error("MongoDB connection error:"));
+db.on("open", () => console.log("MongoDB connected successfully"));
 
 app.get("/", (req, res) => res.send("Hola Mundo"));
 

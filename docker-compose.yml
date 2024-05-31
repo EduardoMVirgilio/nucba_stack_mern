@@ -5,19 +5,20 @@ services:
     container_name: database
     image: mongo:7
     restart: always
-    env_file:
-      - ./db/.env
     ports:
       - "27017:27017"
     volumes:
-      - ./db:/data/db
+      - mongo-data:/data/db
   backend:
     container_name: backend
     restart: always
     build: ./backend
     ports:
       - "3000:3000"
-    volumes:
-      - ./backend:/app
+    environment:
+      MONGO_URI: mongodb://database:27017/nucba_mern
     depends_on:
       - database
+volumes:
+  mongo-data:
+    driver: local
