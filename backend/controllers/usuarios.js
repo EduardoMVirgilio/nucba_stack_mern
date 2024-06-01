@@ -33,6 +33,7 @@ export const validate = async (req, res) => {
     if (!user) {
       return res.status(404).send({ message: "User not found" });
     }
+
     let validate = await bcryptjs.compare(password, user.password);
     if (!validate) {
       return res.status(500).send({ message: "Credentials not match" });
@@ -54,7 +55,8 @@ export const add = async (req, res) => {
     if (!username || !password) {
       return res.status(400).send({ message: "Incomplete Data" });
     }
-    const newUser = new usuario({ username, password });
+    const hash = await bcryptjs.hashSync(password, 10);
+    const newUser = new usuario({ username, password: hash });
     await newUser.save();
     return res.status(202).send(newUser);
   } catch (error) {

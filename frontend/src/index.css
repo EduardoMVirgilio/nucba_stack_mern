@@ -1,0 +1,23 @@
+:root {
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 1);
+  background-color: #242424;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style-type: none;
+  font-family: sans-serif;
+}
+
+#root {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
